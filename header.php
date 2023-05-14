@@ -5,16 +5,16 @@
         
         <ul>
           <li>
-            <a href="home.php">HOME</a>
+            <a href="index.php?menu=1">HOME</a>
           </li>
            <li>
-             <a href="sport.php">SPORT</a>
+             <a href="index.php?menu=2">SPORT</a>
             </li>
            <li>
-             <a href="politik.php">POLITIK</a>
+             <a href="index.php?menu=3">POLITIK</a>
             </li>
             <li>
-              <a href="administracija.php">ADMINISTRACIJA</a>
+              <a href="index.php?menu=4">ADMINISTRACIJA</a>
             </li>
         </ul>';
 ?>
