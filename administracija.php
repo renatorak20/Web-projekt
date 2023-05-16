@@ -7,7 +7,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
    $sessionRazina = $_SESSION['razina'];
 
    if ($sessionRazina == 0) {
-      echo 'Niste admin.';
+    header("Location: index.php");
+    exit;
    } else {
       header("Location: index.php?menu=5");
       exit;

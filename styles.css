@@ -220,6 +220,15 @@ article a {
   padding: 0;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-width: 760px;
+  margin-top: 50px;
+  border: 10px black;
+}
+
 .form-item {
   display: flex;
   flex-direction: column;

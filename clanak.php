@@ -30,10 +30,10 @@ define('UPLPATH', 'images/');
     $row = mysqli_fetch_array($result);
 
     if($row["kategorija_id"] == 0) {
-      $kategorija = 2;
+      $kategorija = 0;
       $kat_ime = "Sport";
     } else {
-      $kategorija = 3;
+      $kategorija = 1;
       $kat_ime = "Politik";
     }
 
@@ -42,7 +42,7 @@ define('UPLPATH', 'images/');
 
     print '<div class="article-container">';
     print '<section class="category" style="margin-top:0px;">';
-    print '<a class="category-title" href="index.php?menu=' . $kategorija . '">' . $kat_ime .'</a>';
+    print '<a class="category-title" href="kategorija.php?kategorija=' . $kategorija . '">' . $kat_ime .'</a>';
     print '</section>';
     print '<h2 class="title-detail">' . $row["naslov"] . '</h2>';
     print '<p class="date-detail">' . $formatiran_datum . '</p>';
