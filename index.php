@@ -29,7 +29,7 @@
   } else if ($menu == 3) {
     include("politik.php");
   } else if ($menu == 4) {
-    include("registracija.php");
+    include("administracija.php");
   }
   ?>
 
