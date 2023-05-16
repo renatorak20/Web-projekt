@@ -210,6 +210,56 @@ article a {
   color: black;
 }
 
+
+.login-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-field-label {
+  margin-bottom: 5px;
+}
+
+.form-field-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-submit-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-submit-button:hover {
+  background-color: #0056b3;
+}
+
+.form-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.forms-container {
+  width: 100%;
+}
+
 @media only screen and (max-width: 768px) {
   .logo {
     width: 150px;

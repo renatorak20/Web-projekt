@@ -19,7 +19,7 @@
   <?php
 
   if(isset($_GET['menu'])) { 
-    $menu   = (int)$_GET['menu']; 
+    $menu = (int)$_GET['menu']; 
   }
 
   if (!isset($menu) || $menu == 1) {
@@ -30,6 +30,8 @@
     include("politik.php");
   } else if ($menu == 4) {
     include("administracija.php");
+  } else if($menu == 5) {
+    include("unos.php");
   }
   ?>
 

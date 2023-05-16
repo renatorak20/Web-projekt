@@ -8,6 +8,15 @@ $sportArticles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $query = "SELECT * FROM clanci WHERE arhiva = 0 AND kategorija_id = 1";
 $result = mysqli_query($dbc, $query);
 $politicsArticles = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+session_start();
+
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION['username'];
+  print 'Prijavljeni ste:' . $username;
+} else {
+  print 'Niste prijavljeni:';
+}
 ?>
 
 <div class="category-container">
