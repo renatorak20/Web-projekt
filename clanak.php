@@ -29,17 +29,29 @@ define('UPLPATH', 'images/');
     $result = mysqli_query($dbc, $query); 
     $row = mysqli_fetch_array($result);
 
+    if($row["kategorija_id"] == 0) {
+      $kategorija = 2;
+      $kat_ime = "Sport";
+    } else {
+      $kategorija = 3;
+      $kat_ime = "Politik";
+    }
+
+    $formatiran_datum = date('d. F Y', strtotime($row["datum"]));
+
+
     print '<div class="article-container">';
-    print '<h1 class="category">Category Name</h1>';
-    print '<h2 class="title">' . $row["naslov"] . '</h2>';
-    print '<p class="date">' . $row["datum"] . '</p>';
-    print '<div class="image-container">';
-    print '<img src="' . UPLPATH . $row["slika"] . '">';
+    print '<section class="category" style="margin-top:0px;">';
+    print '<a class="category-title" href="index.php?menu=' . $kategorija . '">' . $kat_ime .'</a>';
+    print '</section>';
+    print '<h2 class="title-detail">' . $row["naslov"] . '</h2>';
+    print '<p class="date-detail">' . $formatiran_datum . '</p>';
+    print '<div>';
+    print '<img class="image-container-detail" src="' . UPLPATH . $row["slika"] . '">';
     print '</div>';
     print '<p class="brief-description">' . $row["kratki_sadrzaj"] . '</p>';
     print '<p class="long-description">' . $row["sadrzaj"] . '</p>';
     print '</div>';
-
 ?>
 
 <div class="footer-parent">

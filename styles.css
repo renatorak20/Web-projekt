@@ -19,7 +19,7 @@ header {
 }
 
 .nav-parent {
-  border-bottom: 2px solid yellow;
+  border-bottom: 2px solid #FFBE00;
 }
 
 nav {
@@ -47,7 +47,7 @@ nav a {
 }
 
 nav a:hover {
-  color: yellow;
+  color: #FFBE00;
 }
 
 footer {
@@ -67,7 +67,7 @@ footer {
 }
 
 .vijestiNaslov {
-  border: 2px solid yellow;
+  border: 2px solid #FFBE00;
   border-radius: 5px;
 }
 
@@ -75,6 +75,17 @@ footer {
   display: flex;
   margin: 20px;
 }
+
+article a {
+  text-decoration: none;
+  color: black;
+}
+
+.article-title {
+  color: white;
+  text-decoration: none;
+}
+
 
 
 .sport_img {
@@ -91,6 +102,8 @@ footer {
 
 .media_body {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -104,13 +117,12 @@ footer {
 }
 
 .article-container {
-  max-width: 760px;
+  min-width: 760px;
   margin: 0 auto;
-  text-align: center;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
   padding: 20px;
-  margin-top: 20px; /* Add margin to separate groups visually */
+  margin-top: 20px;
+  max-width: 760px;
 }
 
 .category {
@@ -118,22 +130,22 @@ footer {
   margin-top: 20px;
   display: flex;
   align-items: center;
-  background-color: yellow;
-  padding-right: 10px;
+  background-color: #FFBE00;
+  width: 100%;
 }
 
 .category-title {
   color: white;
-  text-decoration: underline;
   font-size: 20px;
-  margin-left: 10px;
   padding: 10px;
 }
 
 .category-container {
   max-width: 760px;
   margin: 0 auto;
+  width: 100%;
 }
+
 
 .category-group {
   margin-bottom: 40px;
@@ -141,18 +153,40 @@ footer {
 }
 
 
+
 .title {
   font-size: 28px;
   margin-top: 20px;
 }
+
+.title-detail {
+  font-size: 28px;
+  margin-top: 20px;
+  margin-left:100px;
+}
+
 
 .date {
   font-size: 16px;
   margin-top: 10px;
 }
 
+.date-detail {
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left:100px;
+}
+
 .image-container {
   margin-top: 20px;
+}
+
+.image-container-detail {
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .image-container img {
@@ -163,11 +197,13 @@ footer {
 .brief-description {
   font-weight: bold;
   margin-top: 20px;
+  margin-left:100px;
 }
 
 .long-description {
   margin-top: 10px;
   text-align: left;
+  margin-left:100px;
 }
 
 .bojaPoruke {

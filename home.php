@@ -13,48 +13,51 @@ $politicsArticles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <div class="category-container">
   <div class="category-group">
     <section class="category">
-      <a href="https://www.example.com" target="_blank" class="category-title">Sport</a>
+    <a href="index.php?menu=2" class="category-title">Sport</a>
     </section>
 
     <?php foreach ($sportArticles as $article) : ?>
       <article>
+        <a href="clanak.php?id=<?php echo $article['id']; ?>">
         <div class="article">
           <div class="sport_img">
             <img src="<?php echo UPLPATH . $article['slika']; ?>">
           </div>
           <div class="media_body">
             <h4 class="title">
-              <a href="clanak.php?id=<?php echo $article['id']; ?>">
                 <?php echo $article['naslov']; ?>
-              </a>
             </h4>
             <p class="description"><?php echo $article['kratki_sadrzaj']; ?></p>
           </div>
         </div>
+              </a>
       </article>
     <?php endforeach; ?>
 </div>
-<div class="category-group">
+</div>
+
+<div class="category-container">
+  <div class="category-group">
     <section class="category">
-      <a href="https://www.example.com" target="_blank" class="category-title">Politics</a>
+    <a href="index.php?menu=3" class="category-title">Politik</a>
     </section>
 
     <?php foreach ($politicsArticles as $article) : ?>
       <article>
+      <a href="clanak.php?id=<?php echo $article['id']; ?>">
         <div class="article">
           <div class="sport_img">
             <img src="<?php echo UPLPATH . $article['slika']; ?>">
           </div>
           <div class="media_body">
             <h4 class="title">
-              <a href="clanak.php?id=<?php echo $article['id']; ?>">
                 <?php echo $article['naslov']; ?>
-              </a>
             </h4>
             <p class="description"><?php echo $article['kratki_sadrzaj']; ?></p>
           </div>
         </div>
+        </a>
       </article>
     <?php endforeach; ?>
-  </div>
+</div>
 </div>
