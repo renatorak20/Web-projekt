@@ -14,10 +14,6 @@ if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
     $admin = true;
   }
 }
-
-echo '<script>console.log('.json_encode($sessionUsername).')</script>';
-echo '<script>console.log('.json_encode($sessionRazina).')</script>';
-
  echo '<img src="images/RP-Online-Logo.svg" class="logo"/>
         
         <ul>
@@ -31,13 +27,20 @@ echo '<script>console.log('.json_encode($sessionRazina).')</script>';
              <a href="kategorija.php?kategorija=1">POLITIK</a>
             </li>
             <li>
-              <a href="index.php?menu=4">ADMINISTRACIJA</a>
-            </li>';
+            <a href="index.php?menu=4">ADMINISTRACIJA</a>
+          </li>';
             
       if($admin == true) {
-        echo '<li>
+        echo '
+        <li>
         <a href="administrator.php">ADMINISTRATOR</a>
       </li>';
+      }
+      if(isset($_SESSION['username'])) {
+        echo '<li class="username logout">' . $sessionUsername . '</li>';
+        echo '<li>
+            <a href="logout.php">Log out</a>
+       </li>';
       }
 
 echo '</ul>';

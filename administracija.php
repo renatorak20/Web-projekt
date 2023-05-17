@@ -1,20 +1,21 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+  }
 include 'dbConnection.php';
 
 if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
-   $sessionUsername = $_SESSION['username'];
-   $sessionRazina = $_SESSION['razina'];
-
-   if ($sessionRazina == 0) {
-    header("Location: index.php");
-    exit;
-   } else {
-      header("Location: index.php?menu=5");
-      exit;
-   }
-
-}
+    $sessionUsername = $_SESSION['username'];
+    $sessionRazina = $_SESSION['razina'];
+ 
+    if ($sessionRazina == 0) {
+     header("Location: index.php");
+     exit;
+    } else {
+       header("Location: index.php?menu=5");
+       exit;
+    }
+ }
 
 
 if (isset($_POST['submit'])) {
@@ -58,7 +59,7 @@ if (isset($_POST['submitLogin'])) {
    $passLogin = $_POST['passLogin'];
 
    if($_POST['usernameLogin'] != "" && $_POST['passLogin'] != "") {
-   // Provjerite korisnika u bazi podataka
+
    $sql = "SELECT * FROM korisnik WHERE username = ?";
    $stmt = mysqli_stmt_init($dbc);
 
@@ -67,18 +68,17 @@ if (isset($_POST['submitLogin'])) {
        mysqli_stmt_execute($stmt);
        $result = mysqli_stmt_get_result($stmt);
        $user = mysqli_fetch_assoc($result);
-       // Provjerite lozinku korisnika
+
        if ($user && password_verify($passLogin, $user['pass'])) {
          print 'Provjera uspješna';
-           // Uspješna prijava - postavite korisničke podatke u sesiju
+
            $_SESSION['username'] = $user['username'];
            $_SESSION['razina'] = $user['razina'];
-           // Preusmjerite korisnika na početnu stranicu ili neku drugu stranicu nakon prijave
+
            header("Location: index.php");
            exit();
        } else {
-         print 'Provjera nije uspješna';
-           // Neuspješna prijava - prikažite poruku ili poduzmite odgovarajuće radnje
+           print 'Provjera nije uspješna';
            $msg = 'Pogrešno korisničko ime ili lozinka.';
        }
    }

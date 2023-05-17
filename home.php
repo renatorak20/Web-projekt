@@ -9,20 +9,15 @@ $query = "SELECT * FROM clanci WHERE arhiva = 0 AND kategorija_id = 1";
 $result = mysqli_query($dbc, $query);
 $politicsArticles = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-session_start();
-
-if (isset($_SESSION['username'])) {
-  $username = $_SESSION['username'];
-  print 'Prijavljeni ste:' . $username;
-} else {
-  print 'Niste prijavljeni:';
+if(!isset($_SESSION)) {
+  session_start();
 }
 ?>
 
 <div class="category-container">
   <div class="category-group">
     <section class="category">
-    <a href="index.php?menu=2" class="category-title">Sport</a>
+    <a href="kategorija.php?kategorija=0" class="category-title">Sport</a>
     </section>
 
     <?php foreach ($sportArticles as $article) : ?>
@@ -48,7 +43,7 @@ if (isset($_SESSION['username'])) {
 <div class="category-container">
   <div class="category-group">
     <section class="category">
-    <a href="index.php?menu=3" class="category-title">Politik</a>
+    <a href="kategorija.php?kategorija=1" class="category-title">Politik</a>
     </section>
 
     <?php foreach ($politicsArticles as $article) : ?>

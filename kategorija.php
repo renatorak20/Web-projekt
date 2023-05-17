@@ -40,7 +40,7 @@ $result = mysqli_query($dbc, $query);
 echo '<div class="category-container">';
 echo '<div class="category-group">';
 echo '<section class="category">';
-echo '<a href="index.php?menu=3" class="category-title">' . $kategorija_naziv .'</a>';
+echo '<a href="kategorija.php?kategorija=' . $kategorija_id . '" class="category-title">' . $kategorija_naziv .'</a>';
 echo '</section>';
 
 while ($row = mysqli_fetch_array($result)) {

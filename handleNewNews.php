@@ -8,8 +8,6 @@
     $picture = $_FILES['picture']['name']; 
     $date = date('Y-m-d');
 
-    echo $date . " " . $naslov . " " . $kratki_sadrzaj  . " " . $sadrzaj  . " " . $kategorija  . " " . $arhiva;
-
     $target_dir = 'images/' . $picture; 
     move_uploaded_file($_FILES["picture"]["tmp_name"], $target_dir); 
     $query = "INSERT INTO clanci (naslov, kratki_sadrzaj, sadrzaj, kategorija_id, arhiva, datum, slika) 

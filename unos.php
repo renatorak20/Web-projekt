@@ -6,78 +6,98 @@
   <link rel="stylesheet" type="text/css" href="newStyle.css">
   <script type="text/javascript" src="jquery-1.11.0.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-   <script src="js/form-validation.js"></script> 
 </head>
 <body>
 
   <script type="text/javascript">
-    document.getElementById("slanje").onclick = function(event) {
+    function slanje() {
 
-    var slanjeForme = true;
+      var slanjeForme = true;
 
-    var poljeTitle = document.getElementById("title");
-    var title = document.getElementById("title").value;
+      var poljeTitle = document.getElementById("title");
+      var title = document.getElementById("title").value;
 
-    if (title.length < 5 || title.length > 30) {
-      slanjeForme = false;
-      poljeTitle.style.border="1px dashed red";
-      document.getElementById("porukaTitle").innerHTML="Naslov vjesti mora imati između 5 i 30 znakova!<br>";
-    } else {
-      poljeTitle.style.border="1px solid green";
-      document.getElementById("porukaTitle").innerHTML="";
-    }
-
-    var poljeAbout = document.getElementById("about");
-    var about = document.getElementById("about").value;
-    if (about.length < 10 || about.length > 100) {
-      slanjeForme = false;
-      poljeAbout.style.border="1px dashed red";
-      document.getElementById("porukaAbout").innerHTML="Kratki sadržaj mora imati između 10 i 100 znakova!<br>";
+      if (title.length < 5 || title.length > 30) {
+        slanjeForme = false;
+        poljeTitle.style.border="1px dashed red";
+        document.getElementById("porukaTitle").innerHTML="Naslov vjesti mora imati između 5 i 30 znakova!<br>";
       } else {
-      poljeAbout.style.border="1px solid green";
-      document.getElementById("porukaAbout").innerHTML="";
-    }
+        poljeTitle.style.border="1px solid green";
+        document.getElementById("porukaTitle").innerHTML="";
+      }
 
-    var poljeContent = document.getElementById("content");
-    var content = document.getElementById("content").value;
-    if (content.length == 0) {
-      slanjeForme = false;
-      poljeContent.style.border="1px dashed red";
-      document.getElementById("porukaContent").innerHTML="Sadržaj mora biti unesen!<br>";
-    } else {
-      poljeContent.style.border="1px solid green";
-      document.getElementById("porukaContent").innerHTML="";
-    }
+      var poljeAbout = document.getElementById("about");
+      var about = document.getElementById("about").value;
+      if (about.length < 10 || about.length > 100) {
+        slanjeForme = false;
+        poljeAbout.style.border="1px dashed red";
+        document.getElementById("porukaAbout").innerHTML="Kratki sadržaj mora imati između 10 i 100 znakova!<br>";
+        } else {
+        poljeAbout.style.border="1px solid green";
+        document.getElementById("porukaAbout").innerHTML="";
+      }
 
-    var poljeSlika = document.getElementById("picture");
-    var pphoto = document.getElementById("picture").value;
-    if (pphoto.length == 0) {
-      slanjeForme = false;
-      poljeSlika.style.border="1px dashed red";
-      document.getElementById("porukaSlika").innerHTML="Slika mora biti unesena!<br>";
-    } else {
-      poljeSlika.style.border="1px solid green";
-      document.getElementById("porukaSlika").innerHTML="";
-    }
+      var poljeContent = document.getElementById("content");
+      var content = document.getElementById("content").value;
+      if (content.length == 0) {
+        slanjeForme = false;
+        poljeContent.style.border="1px dashed red";
+        document.getElementById("porukaContent").innerHTML="Sadržaj mora biti unesen!<br>";
+      } else {
+        poljeContent.style.border="1px solid green";
+        document.getElementById("porukaContent").innerHTML="";
+      }
 
-    var poljeCategory = document.getElementById("category");
-    if(document.getElementById("category").selectedIndex == 0) {
-      slanjeForme = false;
-      poljeCategory.style.border="1px dashed red";
-      document.getElementById("porukaKategorija").innerHTML="Kategorija mora biti odabrana!<br>";
-    } else {
-      poljeCategory.style.border="1px solid green";
-      document.getElementById("porukaKategorija").innerHTML="";
-    }
+      var poljeSlika = document.getElementById("picture");
+      var pphoto = document.getElementById("picture").value;
+      if (pphoto.length == 0) {
+        slanjeForme = false;
+        poljeSlika.style.border="1px dashed red";
+        document.getElementById("porukaSlika").innerHTML="Slika mora biti unesena!<br>";
+      } else {
+        poljeSlika.style.border="1px solid green";
+        document.getElementById("porukaSlika").innerHTML="";
+      }
 
-    if (slanjeForme != true) {
-      event.preventDefault();
-    }};
+      var poljeCategory = document.getElementById("category");
+      if(document.getElementById("category").selectedIndex == 0) {
+        slanjeForme = false;
+        poljeCategory.style.border="1px dashed red";
+        document.getElementById("porukaKategorija").innerHTML="Kategorija mora biti odabrana!<br>";
+      } else {
+        poljeCategory.style.border="1px solid green";
+        document.getElementById("porukaKategorija").innerHTML="";
+      }
+
+      if (slanjeForme != true) {
+        event.preventDefault();
+      } else {
+        include 'dbConnection.php'; 
+        $naslov = $_POST["title"];
+        $kratki_sadrzaj = $_POST["about"];
+        $sadrzaj = $_POST["content"];
+        $kategorija = $_POST["category"];
+        $arhiva = isset($_POST["archive"]) ? 1 : 0;
+        $picture = $_FILES['picture']['name']; 
+        $date = date('Y-m-d');
+
+        $target_dir = 'images/' . $picture; 
+        move_uploaded_file($_FILES["picture"]["tmp_name"], $target_dir); 
+        $query = "INSERT INTO clanci (naslov, kratki_sadrzaj, sadrzaj, kategorija_id, arhiva, datum, slika) 
+        VALUES ('$naslov', '$kratki_sadrzaj', '$sadrzaj', '$kategorija', '$arhiva', '$date', '$picture')"; 
+        $result = mysqli_query($dbc, $query) or die('Error querying database.'); 
+
+        $articleId = mysqli_insert_id($dbc);
+        
+        header("Location: clanak.php?id=$articleId");
+        exit;
+      }
+}
+
     </script>
   <main>
     <h1 class="naslov">Unos vijesti</h1>
-    <form action="handleNewNews.php" method="POST" enctype="multipart/form-data"> 
+    <form action="" method="POST" enctype="multipart/form-data"> 
       <div class="form-item"> 
         <span id="porukaTitle" class="bojaPoruke"></span>
         <label for="title">Naslov vijesti</label> 
@@ -125,7 +145,7 @@
     </div> 
     <div class="form-item"> 
       <button type="reset" value="Poništi">Poništi</button> 
-      <button type="submit" value="Prihvati" id="slanje">Prihvati</button> 
+      <button type="submit" value="Prihvati" id="slanje" onclick="slanje()">Prihvati</button> 
     </div> 
     </form>
   </main>
