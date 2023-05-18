@@ -94,43 +94,154 @@ if (isset($_POST['submitLogin'])) {
 }
 
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script type="text/javascript" src="jquery-1.11.0.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+   <script src="js/form-validation.js"></script> 
+  <title>RP Online</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+        $(function() {
+            $("form[name='registracija']").validate({
+                rules: {
+                    ime: {
+                        required: true,
+                    },
+                    prezime: {
+                        required: true,
+                    },
+                    username: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 15,
+                    },
+                    pass: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 15,
+                    }, 
+                    passRep: {
+                        equalTo: "#pass"
+                    }
+
+                },
+                messages: {
+                    ime: {
+                        required: "Ime ne smije biti prazno",
+                    },
+                    prezime: {
+                        required: "Prezime ne smije biti prazno",
+                    },
+                    username: {
+                        required: "Korisnicko ime ne smije biti prazno",
+                        minlength: "Korisnicko ime ne smije biti krace od 6 znakova",
+                        maxlength: "Korisnicko ime ne smije biti duze od 15 znakova",
+                    },
+                    pass: {
+                        required: "Lozinka ne smije biti prazna",
+                        minlength: "Lozinka ne smije biti kraca od 6 znakova",
+                        maxlength: "Lozinka ne smije biti duza od 15 znakova",
+                    },
+                    passRep: {
+                        equalTo: "Lozinke moraju biti jednake"
+                    },
+                },
+                highlight: function(element) {
+                    $(element).next().addClass("error");
+                },
+                unhighlight: function(element) {
+                    $(element).next().removeClass("error");
+                },
+                errorPlacement: function(error, element) {
+                    error.addClass("error-message");
+                    error.insertAfter(element);
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+
+        $(function() {
+            $("form[name='prijava']").validate({
+                rules: {
+                    usernameLogin: {
+                        required: true,
+                    },
+                    passLogin: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    usernameLogin: {
+                        required: "Korisnicko ime ne smije biti prazno",
+                    },
+                    passLogin: {
+                        required: "Lozinka ne smije biti prazna",
+                    },
+                },
+                highlight: function(element) {
+                    $(element).next().addClass("error");
+                },
+                unhighlight: function(element) {
+                    $(element).next().removeClass("error");
+                },
+                errorPlacement: function(error, element) {
+                    error.addClass("error-message");
+                    error.insertAfter(element);
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+
+
+</script>
+
 <div class="forms-container">
     <section class="login-body section-login">
       <h4>Registracija</h4>
-        <form enctype="multipart/form-data" action="" method="POST" class="form-registration">
+        <form enctype="multipart/form-data" action="" method="POST" class="form-registration" name="registracija">
             <div class="form-item">
-                <span id="porukaIme" class="bojaPoruke"></span>
                 <label for="title">Ime: </label>
-                <div class="form-field-label">
+                <div class="form-field-label form-field">
                     <input type="text" name="ime" id="ime" class="form-field-input">
                 </div>
             </div>
             <div class="form-item">
-                <span id="porukaPrezime" class="bojaPoruke"></span>
                 <label for="about">Prezime: </label>
-                <div class="form-field-label">
+                <div class="form-field-label form-field">
                     <input type="text" name="prezime" id="prezime" class="form-field-input">
                 </div>
             </div>
             <div class="form-item">
-                <span id="porukaUsername" class="bojaPoruke"><?php if (
-            isset($msg)) echo $msg; ?></span>
             <label for="content">Korisničko ime:</label>
-            <div class="form-field-label">
+            <div class="form-field-label form-field">
                 <input type="text" name="username" id="username" class="form-field-input">
             </div>
         </div>
         <div class="form-item">
-            <span id="porukaPass" class="bojaPoruke"></span>
-            <label for="pphoto">Lozinka: </label>
-            <div class="form-field-label">
+            <label for="pass">Lozinka: </label>
+            <div class="form-field-label form-field">
                 <input type="password" name="pass" id="pass" class="form-field-input">
             </div>
         </div>
         <div class="form-item">
-            <span id="porukaPassRep" class="bojaPoruke"></span>
             <label for="pphoto">Ponovite lozinku: </label>
-            <div class="form-field-label">
+            <div class="form-field-label form-field">
                 <input type="password" name="passRep" id="passRep" class="form-field-input">
             </div>
         </div>
@@ -140,17 +251,17 @@ if (isset($_POST['submitLogin'])) {
         </form>
 
         <h4 class="margin-top">Prijava</h4>
-        <form enctype="multipart/form-data" action="" method="POST" class="form-login">
+        <form enctype="multipart/form-data" action="" method="POST" class="form-login" name="prijava">
             <div class="form-item">
             <label for="content" class="white-text">Korisničko ime:</label>
-            <div class="form-field-label">
+            <div class="form-field-label form-field">
                 <input type="text" name="usernameLogin" id="usernameLogin" class="form-field-input">
             </div>
         </div>
         <div class="form-item">
             <span id="porukaPassLogin" class="bojaPoruke"></span>
             <label for="pphotoLogin" class="white-text">Lozinka: </label>
-            <div class="form-field-label">
+            <div class="form-field-label form-field">
                 <input type="password" name="passLogin" id="passLogin" class="form-field-input">
             </div>
         </div>
@@ -160,104 +271,6 @@ if (isset($_POST['submitLogin'])) {
     </form>
 </section>
 </div>
-<script type="text/javascript">
-    document.getElementById("slanje").onclick = function (event) {
-        var slanjeFormeReg = true;
 
-        // Ime korisnika mora biti uneseno
-        var poljeIme = document.getElementById("ime");
-        var ime = document.getElementById("ime").value;
+</body>
 
-        if (ime.length == 0) {
-         slanjeFormeReg = false;
-            poljeIme.style.border = "1px dashed red";
-            document.getElementById("porukaIme").innerHTML = "<br>Unesite ime!<br>";
-        } else {
-            poljeIme.style.border = "1px solid green";
-            document.getElementById("porukaIme").innerHTML = "";
-        }
-
-        // Prezime korisnika mora biti uneseno
-        var poljePrezime = document.getElementById("prezime");
-        var prezime = document.getElementById("prezime").value;
-
-        if (prezime.length == 0) {
-         slanjeFormeReg = false;
-            poljePrezime.style.border = "1px dashed red";
-            document.getElementById("porukaPrezime").innerHTML = "<br>Unesite Prezime!<br>";
-        } else {
-            poljePrezime.style.border = "1px solid green";
-            document.getElementById("porukaPrezime").innerHTML = "";
-        }
-
-        // Korisničko ime mora biti uneseno
-        var poljeUsername = document.getElementById("username");
-        var username = document.getElementById("username").value;
-
-        if (username.length == 0) {
-         slanjeFormeReg = false;
-            poljeUsername.style.border = "1px dashed red";
-            document.getElementById("porukaUsername").innerHTML = "<br>Unesite korisničko ime!<br>";
-        } else {
-            poljeUsername.style.border = "1px solid green";
-            document.getElementById("porukaUsername").innerHTML = "";
-        }
-
-        // Provjera podudaranja lozinki
-        var poljePass = document.getElementById("pass");
-        var pass = document.getElementById("pass").value;
-        var poljePassRep = document.getElementById("passRep");
-        var passRep = document.getElementById("passRep").value;
-        if (pass.length == 0 || passRep.length == 0 || pass != passRep) {
-         slanjeFormeReg = false;
-            poljePass.style.border = "1px dashed red";
-            poljePassRep.style.border = "1px dashed red";
-            document.getElementById("porukaPass").innerHTML = "<br>Lozinke nisu iste!<br>";
-            document.getElementById("porukaPassRep").innerHTML = "<br>Lozinke nisu iste!<br>";
-        } else {
-            poljePass.style.border = "1px solid green";
-            poljePassRep.style.border = "1px solid green";
-            document.getElementById("porukaPass").innerHTML = "";
-            document.getElementById("porukaPassRep").innerHTML = "";
-        }
-
-        if (slanjeFormeReg != true) {
-            event.preventDefault();
-        }
-    };
-
-
-    document.getElementById("login").onclick = function (event) {
-        var slanjeForme = true;
-
-        var poljeUsername = document.getElementById("usernameLogin");
-        var username = document.getElementById("usernameLogin").value;
-
-        if (username.length == 0) {
-            slanjeForme = false;
-            poljeUsername.style.border = "1px dashed red";
-            document.getElementById("porukaUsernameLogin").innerHTML = "<br>Unesite korisničko ime!<br>";
-        } else {
-            poljeUsername.style.border = "1px solid green";
-            document.getElementById("porukaUsernameLogin").innerHTML = "";
-        }
-
-        var poljePass = document.getElementById("passLogin");
-        var pass = document.getElementById("passLogin").value;
-        if (pass.length == 0) {
-            slanjeForme = false;
-            poljePass.style.border = "1px dashed red";
-            poljePassRep.style.border = "1px dashed red";
-            document.getElementById("porukaPassLogin").innerHTML = "<br>Lozinka nije unesena!<br>";
-        } else {
-            poljePass.style.border = "1px solid green";
-            poljePassRep.style.border = "1px solid green";
-            document.getElementById("porukaPassLogin").innerHTML = "";
-        }
-
-        if (slanjeForme != true) {
-            event.preventDefault();
-        }
-    };
-
-</script>
