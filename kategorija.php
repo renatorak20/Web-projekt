@@ -35,7 +35,7 @@ $result = mysqli_query($dbc, $query);
     </nav>
   </div>
   
-    <?php
+<?php
 
 echo '<div class="category-container">';
 echo '<div class="category-group">';
@@ -65,8 +65,6 @@ while ($row = mysqli_fetch_array($result)) {
 
 echo '</div>';
 echo '</div>';
-
-exit;
 
     ?>
 

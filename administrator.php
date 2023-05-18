@@ -5,19 +5,16 @@ define('UPLPATH', 'images/');
 include('dbConnection.php');
 
 if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
-   $sessionUsername = $_SESSION['username'];
-   $sessionRazina = $_SESSION['razina'];
+  $sessionUsername = $_SESSION['username'];
+  $sessionRazina = $_SESSION['razina'];
 
-   if ($sessionRazina == 0) {
-    header("Location: index.php");
-    exit;
-   } else {
-      header("Location: index.php?menu=5");
-      exit;
-   }
-}else {
-  header("Location: index.php");
-  exit;
+  if ($sessionRazina == 0) {
+   header("Location: index.php");
+   exit;
+  } else {
+     header("Location: index.php?menu=5");
+     exit;
+  }
 }
 
 if(isset($_POST['delete'])) { 
@@ -81,7 +78,7 @@ if (isset($_POST['update'])) {
 $query = "SELECT * FROM clanci"; 
 $result = mysqli_query($dbc, $query); 
 while($row = mysqli_fetch_array($result)) { 
-  echo '<form enctype="multipart/form-data" action="" method="POST" class="form"> 
+  echo '<form enctype="multipart/form-data" action="" method="POST" class="form form-edit"> 
   <div class="form-item"> 
   <label for="title">Naslov vjesti:</label> 
   <div class="form-field"> 

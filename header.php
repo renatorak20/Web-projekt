@@ -5,6 +5,7 @@ session_start();
 $admin = false;
 $sessionUsername = "";
 $sessionRazina = "";
+$ulogiran = true;
 
 if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
   $sessionUsername = $_SESSION['username'];
@@ -13,6 +14,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
   if ($sessionRazina == 1) {
     $admin = true;
   }
+} else {
+  $ulogiran = false;
 }
  echo '<img src="images/RP-Online-Logo.svg" class="logo"/>
         
@@ -25,13 +28,13 @@ if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
             </li>
            <li>
              <a href="kategorija.php?kategorija=1">POLITIK</a>
-            </li>
-            <li>
-            <a href="index.php?menu=4">ADMINISTRACIJA</a>
-          </li>';
+            </li>';
             
       if($admin == true) {
         echo '
+        <li>
+        <a href="index.php?menu=4">ADMINISTRACIJA</a>
+      </li>
         <li>
         <a href="administrator.php">ADMINISTRATOR</a>
       </li>';
@@ -41,6 +44,11 @@ if(isset($_SESSION['username']) && isset($_SESSION['razina'])) {
         echo '<li>
             <a href="logout.php">Log out</a>
        </li>';
+      } else {
+        echo '
+        <li>
+        <a href="index.php?menu=4">LOGIN</a>
+      </li>';
       }
 
 echo '</ul>';

@@ -27,7 +27,6 @@ if (isset($_POST['submit'])) {
     $razina = 0;
     $registriranKorisnik = '';
 
-    // Provjera postoji li u bazi već korisnik s tim korisničkim imenom
     $sql = "SELECT username FROM korisnik WHERE username = ?";
     $stmt = mysqli_stmt_init($dbc);
 
@@ -40,7 +39,6 @@ if (isset($_POST['submit'])) {
     if (mysqli_stmt_num_rows($stmt) > 0) {
         $msg = 'Korisničko ime već postoji!';
     } else {
-        // Ako ne postoji korisnik s tim korisničkim imenom - Registracija korisnika u bazi pazeći na SQL injection
         $sql = "INSERT INTO korisnik (ime, prezime, username, pass, razina) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($dbc);
 
@@ -48,6 +46,13 @@ if (isset($_POST['submit'])) {
             mysqli_stmt_bind_param($stmt, 'ssssd', $ime, $prezime, $username, $hashed_password, $razina);
             mysqli_stmt_execute($stmt);
             $registriranKorisnik = true;
+
+            $_SESSION['username'] = $username;
+            $_SESSION['razina'] = $razina;
+ 
+            header("Location: index.php");
+            exit();
+
         }
     }
 
@@ -92,7 +97,7 @@ if (isset($_POST['submitLogin'])) {
 <div class="forms-container">
     <section class="login-body section-login">
       <h4>Registracija</h4>
-        <form enctype="multipart/form-data" action="" method="POST">
+        <form enctype="multipart/form-data" action="" method="POST" class="form-registration">
             <div class="form-item">
                 <span id="porukaIme" class="bojaPoruke"></span>
                 <label for="title">Ime: </label>
@@ -111,7 +116,6 @@ if (isset($_POST['submitLogin'])) {
                 <span id="porukaUsername" class="bojaPoruke"><?php if (
             isset($msg)) echo $msg; ?></span>
             <label for="content">Korisničko ime:</label>
-            <!-- Ispis poruke nakon provjere korisničkog imena u bazi -->
             <div class="form-field-label">
                 <input type="text" name="username" id="username" class="form-field-input">
             </div>
@@ -135,19 +139,17 @@ if (isset($_POST['submitLogin'])) {
         </div>
         </form>
 
-        <h4>Prijava</h4>
-        <form enctype="multipart/form-data" action="" method="POST">
+        <h4 class="margin-top">Prijava</h4>
+        <form enctype="multipart/form-data" action="" method="POST" class="form-login">
             <div class="form-item">
-                <span id="porukaUsernameLogin" class="bojaPoruke"><?php if (
-            isset($msg)) echo $msg; ?></span>
-            <label for="content">Korisničko ime:</label>
+            <label for="content" class="white-text">Korisničko ime:</label>
             <div class="form-field-label">
                 <input type="text" name="usernameLogin" id="usernameLogin" class="form-field-input">
             </div>
         </div>
         <div class="form-item">
             <span id="porukaPassLogin" class="bojaPoruke"></span>
-            <label for="pphotoLogin">Lozinka: </label>
+            <label for="pphotoLogin" class="white-text">Lozinka: </label>
             <div class="form-field-label">
                 <input type="password" name="passLogin" id="passLogin" class="form-field-input">
             </div>
