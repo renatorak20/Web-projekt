@@ -105,8 +105,8 @@
       </div> 
     </div> 
       <div class="form-item"> 
-      <label>Spremiti u arhivu: 
-      <div class="form-field"> 
+      <label>Spremiti u arhivu? 
+      <div class="form-checkbox"> 
         <input type="checkbox" name="archive"> 
       </div> 
     </label> 
