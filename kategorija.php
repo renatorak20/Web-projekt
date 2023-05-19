@@ -34,7 +34,7 @@ $result = mysqli_query($dbc, $query);
       <?php include("header.php"); ?>
     </nav>
   </div>
-  
+  <content>
 <?php
 
 echo '<div class="category-container">';
@@ -67,7 +67,7 @@ echo '</div>';
 echo '</div>';
 
     ?>
-
+  </content>
   <div class="footer-parent">
     <footer>
       <?php include("footer.php"); ?>

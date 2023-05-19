@@ -110,7 +110,7 @@ if (isset($_POST['submitLogin'])) {
 </head>
 
 <body>
-
+<content>
 <script type="text/javascript">
 
         $(function() {
@@ -231,6 +231,13 @@ if (isset($_POST['submitLogin'])) {
             <label for="content">Korisničko ime:</label>
             <div class="form-field-label form-field">
                 <input type="text" name="username" id="username" class="form-field-input">
+                <div class="error-message"><?php 
+                
+                if(isset($msg)) {
+                    echo $msg;
+                }
+
+                ?></div>
             </div>
         </div>
         <div class="form-item">
@@ -271,6 +278,6 @@ if (isset($_POST['submitLogin'])) {
     </form>
 </section>
 </div>
-
+    </content>
 </body>
 

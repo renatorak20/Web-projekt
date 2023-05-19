@@ -75,13 +75,13 @@ if (isset($_POST['update'])) {
     </nav>
   </div>
 
-
+  <content>
 <?php
 
 $query = "SELECT * FROM clanci"; 
 $result = mysqli_query($dbc, $query); 
 while($row = mysqli_fetch_array($result)) { 
-  echo '<form enctype="multipart/form-data" action="" method="POST" class="form form-edit" name="edit"> 
+  echo '<form enctype="multipart/form-data" action="" method="POST" class="form form-edit" name="edit['.$row['id'].']"> 
   <div class="form-item"> 
   <div class="form-field">
   <label for="title">Naslov vjesti:</label> 
@@ -89,7 +89,7 @@ while($row = mysqli_fetch_array($result)) {
   </div> 
   </div> 
   <div class="form-item">
-  <label for="about">Kratki sadržaj vijesti (do 50 znakova):</label> 
+  <label for="about">Kratki sadržaj vijesti (do 100 znakova):</label> 
   <div class="form-field"> 
   <textarea name="about" id="kratki_sadrzaj" cols="30" rows="10" class="form-field-textual">'.$row['kratki_sadrzaj'].'</textarea> 
   </div> 
@@ -139,56 +139,6 @@ while($row = mysqli_fetch_array($result)) {
 }
 
 ?>
-
-<script>
-        $(function() {
-            $("form[name='edit']").validate({
-                rules: {
-                    title: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 30,
-                    },
-                    about: {
-                        required: true,
-                        minlength: 10,
-                        maxlength: 50,
-                    },
-                    content: {
-                        required: true,
-                    },
-                },
-                messages: {
-                    title: {
-                        required: "Naslov ne smije biti prazan",
-                        minlength: "Naslov treba imati više od 6 znakova",
-                        maxlength: "Naslov treba imati manje od 30 znakova",
-                    },
-                    about: {
-                        required: "Potrebno je upisati kratki sadrzaj",
-                        minlength: "Kratki sadrzaj ne smije biti kraci od 10 znakova",
-                        maxLength: "Kratki sadrzaj ne smije biti duzi od 50 znakova",
-                    },
-                    content: {
-                        required: "Potrebno je upisati sadrzaj",
-                    },
-                },
-                highlight: function(element) {
-                    $(element).next().addClass("error");
-                },
-                unhighlight: function(element) {
-                    $(element).next().removeClass("error");
-                },
-                errorPlacement: function(error, element) {
-                    error.addClass("error-message");
-                    error.insertAfter(element);
-                },
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
-        });
-    </script>
 
 <div class="footer-parent">
     <footer>

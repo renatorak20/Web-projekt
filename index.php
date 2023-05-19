@@ -19,6 +19,7 @@
     </nav>
   </div>
   
+  <content>
   <?php
 
   if(isset($_GET['menu'])) { 
@@ -37,7 +38,7 @@
     include("unos.php");
   }
   ?>
-
+  </content>
   <div class="footer-parent">
     <footer>
       <?php include("footer.php"); ?>

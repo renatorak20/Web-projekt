@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Unos vijesti ili proizvoda</title>
-  <link rel="stylesheet" type="text/css" href="newStyle.css">
-  <script type="text/javascript" src="jquery-1.11.0.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-   <script src="js/form-validation.js"></script> 
-   
-</head>
-<body>
 
 <script>
         $(function() {
@@ -24,7 +11,7 @@
                     about: {
                         required: true,
                         minlength: 10,
-                        maxlength: 50,
+                        maxlength: 100,
                     },
                     content: {
                         required: true,
@@ -43,7 +30,7 @@
                     about: {
                         required: "Potrebno je upisati kratki sadrzaj",
                         minlength: "Kratki sadrzaj ne smije biti kraci od 10 znakova",
-                        maxLength: "Kratki sadrzaj ne smije biti duzi od 50 znakova",
+                        maxLength: "Kratki sadrzaj ne smije biti duzi od 100 znakova",
                     },
                     content: {
                         required: "Potrebno je upisati sadrzaj",
@@ -70,7 +57,7 @@
     </script>
   <main>
     <h1 class="naslov">Unos vijesti</h1>
-    <form name="unos" action="handleNewNews.php" method="POST" enctype="multipart/form-data" class="form-news"> 
+    <form name="unos" action="skripta.php" method="POST" enctype="multipart/form-data" class="form-news"> 
       <div class="form-item"> 
         <label for="title">Naslov vijesti</label> 
         <div class="form-field"> 
@@ -78,7 +65,7 @@
         </div> 
       </div> 
       <div class="form-item">
-        <label for="about">Kratki sadržaj vijesti (do 50 znakova)</label> 
+        <label for="about">Kratki sadržaj vijesti (do 100 znakova)</label> 
         <div class="form-field"> 
           <textarea name="about" id="about" cols="30" rows="10" class="form-field-textual"></textarea> 
         </div> 
@@ -119,5 +106,4 @@
   </main>
 
 
-</body>
-</html>
+

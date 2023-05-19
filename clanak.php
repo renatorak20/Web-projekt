@@ -46,6 +46,7 @@ define('UPLPATH', 'images/');
     print '</section>';
     print '<h2 class="title-detail">' . $row["naslov"] . '</h2>';
     print '<p class="date-detail">' . $formatiran_datum . '</p>';
+    print '<p class="date-detail">' . $row["autor"] . '</p>';
     print '<div>';
     print '<img class="image-container-detail" src="' . UPLPATH . $row["slika"] . '">';
     print '</div>';
