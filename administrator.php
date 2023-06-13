@@ -49,7 +49,10 @@ if (isset($_POST['update'])) {
   }
 
   $query = "UPDATE clanci SET naslov='$title', kratki_sadrzaj='$about', sadrzaj='$content', slika='$picture', kategorija_id='$category', arhiva='$archive' WHERE id=$id";
-  $result = mysqli_query($dbc, $query);
+  $query = "UPDATE clanci SET naslov= ?, kratki_sadrzaj= ?, sadrzaj= ?, slika= ?, kategorija_id= ?, arhiva= ? WHERE id=$id";
+  $stmt = $dbc->prepare($query);
+  $stmt-> bind_param("ssssds", $title, $about, $content, $picture, $category, $archive);
+  $stmt->execute();
 }
 
 ?>
@@ -78,68 +81,68 @@ if (isset($_POST['update'])) {
   <content>
 <?php
 
-$query = "SELECT * FROM clanci"; 
-$result = mysqli_query($dbc, $query); 
-while($row = mysqli_fetch_array($result)) { 
-  echo '<form enctype="multipart/form-data" action="" method="POST" class="form form-edit" name="edit['.$row['id'].']"> 
-  <div class="form-item"> 
-  <div class="form-field">
-  <label for="title">Naslov vjesti:</label> 
-  <input type="text" name="title" class="form-field-textual edit-input" value="'.$row['naslov'].'"> 
-  </div> 
-  </div> 
-  <div class="form-item">
-  <label for="about">Kratki sadržaj vijesti (do 100 znakova):</label> 
-  <div class="form-field"> 
-  <textarea name="about" id="kratki_sadrzaj" cols="30" rows="10" class="form-field-textual">'.$row['kratki_sadrzaj'].'</textarea> 
-  </div> 
-  </div> 
-  <div class="form-item">
-  <label for="content">Sadržaj vijesti:</label> 
-  <div class="form-field"> 
-  <textarea name="content" id="sadrzaj" cols="30" rows="10" class="form-field-textual">'.$row['sadrzaj'].'</textarea> 
-  </div> 
-  </div> 
-  <div class="form-item"> 
-  <label for="pphoto">Slika:</label> 
-  <div class="form-field">
-  <input type="file" class="input-text" id="picture" value="'.$row['slika'].'" name="picture"/> 
-  <br>
-  <img src="' . UPLPATH . $row['slika'] . '" width=100px>
-  </div> 
-  </div> 
-  <div class="form-item"> 
-  <label for="category">Kategorija vijesti:</label> 
-  <div class="form-field"> 
-  <select name="category" id="" class="form-field-textual"> 
-  <option value="0"'; if ($row['kategorija_id'] == 0) echo ' selected="selected"'; echo '>Sport</option> 
-  <option value="1"'; if ($row['kategorija_id'] == 1) echo ' selected="selected"'; echo '>Politik</option> 
-  </select> 
-  </div> 
-  </div> 
-  <div class="form-item"> 
-  <label>Spremiti u arhivu: 
-  <div class="form-checkbox">';
-    if($row['arhiva'] == 0) { 
-        echo '<input type="checkbox" name="archive" id="archive"/> Arhiviraj?'; 
-    } else { 
-        echo '<input type="checkbox" name="archive" id="archive" checked/> Arhiviraj?'; 
-    } echo '
+  $query = "SELECT * FROM clanci"; 
+  $result = mysqli_query($dbc, $query); 
+  while($row = mysqli_fetch_array($result)) { 
+    echo '<form enctype="multipart/form-data" action="" method="POST" class="form form-edit" name="edit['.$row['id'].']"> 
+    <div class="form-item"> 
+    <div class="form-field">
+    <label for="title">Naslov vjesti:</label> 
+    <input type="text" name="title" class="form-field-textual edit-input" value="'.$row['naslov'].'"> 
     </div> 
-    </label> 
+    </div> 
+    <div class="form-item">
+    <label for="about">Kratki sadržaj vijesti (do 100 znakova):</label> 
+    <div class="form-field"> 
+    <textarea name="about" id="kratki_sadrzaj" cols="30" rows="10" class="form-field-textual">'.$row['kratki_sadrzaj'].'</textarea> 
+    </div> 
+    </div> 
+    <div class="form-item">
+    <label for="content">Sadržaj vijesti:</label> 
+    <div class="form-field"> 
+    <textarea name="content" id="sadrzaj" cols="30" rows="10" class="form-field-textual">'.$row['sadrzaj'].'</textarea> 
     </div> 
     </div> 
     <div class="form-item"> 
-    <input type="hidden" name="id" class="form-field-textual" value="'.$row['id'].'"> 
-    <button type="reset" value="Poništi">Poništi</button> 
-    <button type="submit" name="update" value="Prihvati" id="izmjeni">Izmjeni</button> 
-    <button type="submit" name="delete" value="Izbriši">Izbriši</button> 
+    <label for="pphoto">Slika:</label> 
+    <div class="form-field">
+    <input type="file" class="input-text" id="picture" value="'.$row['slika'].'" name="picture"/> 
+    <br>
+    <img src="' . UPLPATH . $row['slika'] . '" width=100px>
     </div> 
-    </form>'; 
-}
+    </div> 
+    <div class="form-item"> 
+    <label for="category">Kategorija vijesti:</label> 
+    <div class="form-field"> 
+    <select name="category" id="" class="form-field-textual"> 
+    <option value="0"'; if ($row['kategorija_id'] == 0) echo ' selected="selected"'; echo '>Sport</option> 
+    <option value="1"'; if ($row['kategorija_id'] == 1) echo ' selected="selected"'; echo '>Politik</option> 
+    </select> 
+    </div> 
+    </div> 
+    <div class="form-item"> 
+    <label>Spremiti u arhivu: 
+    <div class="form-checkbox">';
+      if($row['arhiva'] == 0) { 
+          echo '<input type="checkbox" name="archive" id="archive"/> Arhiviraj?'; 
+      } else { 
+          echo '<input type="checkbox" name="archive" id="archive" checked/> Arhiviraj?'; 
+      } echo '
+      </div> 
+      </label> 
+      </div> 
+      </div> 
+      <div class="form-item"> 
+      <input type="hidden" name="id" class="form-field-textual" value="'.$row['id'].'"> 
+      <button type="reset" value="Poništi">Poništi</button> 
+      <button type="submit" name="update" value="Prihvati" id="izmjeni">Izmjeni</button> 
+      <button type="submit" name="delete" value="Izbriši">Izbriši</button> 
+      </div> 
+      </form>'; 
+  }
 
 ?>
-
+  </content>
 <div class="footer-parent">
     <footer>
       <?php include("footer.php"); ?>

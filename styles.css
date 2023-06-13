@@ -121,7 +121,7 @@ article a {
 
 .description {
   margin: 10px 0;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .article-container {
@@ -208,12 +208,14 @@ article a {
   font-weight: bold;
   margin-top: 20px;
   margin-left:100px;
+  font-size:24px;
 }
 
 .long-description {
   margin-top: 10px;
   text-align: left;
   margin-left:100px;
+  font-size:18px;
 }
 
 .error-message {
@@ -314,13 +316,13 @@ main {
 .form-registration {
   background-color: #a2d5c6;
   border-radius: 10px;
-  padding: 5px;
+  padding: 25px;
 }
 
 .form-login {
   background-color: #007fff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 25px;
 }
 
   
@@ -358,6 +360,8 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #45a049;
 }
+
+
 
 @media only screen and (max-width: 890px) {
 

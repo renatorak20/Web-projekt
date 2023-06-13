@@ -22,21 +22,21 @@
   <content>
   <?php
 
-  if(isset($_GET['menu'])) { 
-    $menu = (int)$_GET['menu']; 
-  }
+    if(isset($_GET['menu'])) { 
+      $menu = (int)$_GET['menu']; 
+    }
 
-  if (!isset($menu) || $menu == 1) {
-    include("home.php");
-  } else if ($menu == 2) {
-    include("sport.php");
-  } else if ($menu == 3) {
-    include("politik.php");
-  } else if ($menu == 4) {
-    include("administracija.php");
-  } else if($menu == 5) {
-    include("unos.php");
-  }
+    if (!isset($menu) || $menu == 1) {
+      include("home.php");
+    } else if ($menu == 2) {
+      include("sport.php");
+    } else if ($menu == 3) {
+      include("politik.php");
+    } else if ($menu == 4) {
+      include("administracija.php");
+    } else if($menu == 5) {
+      include("unos.php");
+    }
   ?>
   </content>
   <div class="footer-parent">

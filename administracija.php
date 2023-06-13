@@ -213,7 +213,7 @@ if (isset($_POST['submitLogin'])) {
 
 <div class="forms-container">
     <section class="login-body section-login">
-      <h4>Registracija</h4>
+      <h1>Registracija</h1>
         <form enctype="multipart/form-data" action="" method="POST" class="form-registration" name="registracija">
             <div class="form-item">
                 <label for="title">Ime: </label>
@@ -257,7 +257,7 @@ if (isset($_POST['submitLogin'])) {
         </div>
         </form>
 
-        <h4 class="margin-top">Prijava</h4>
+        <h1 class="margin-top">Prijava</h1>
         <form enctype="multipart/form-data" action="" method="POST" class="form-login" name="prijava">
             <div class="form-item">
             <label for="content" class="white-text">Korisničko ime:</label>

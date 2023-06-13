@@ -28,9 +28,9 @@ if(!isset($_SESSION)) {
             <img src="<?php echo UPLPATH . $article['slika']; ?>">
           </div>
           <div class="media_body">
-            <h4 class="title">
+            <h1 class="title">
                 <?php echo $article['naslov']; ?>
-            </h4>
+            </h1>
             <p class="description"><?php echo $article['kratki_sadrzaj']; ?></p>
           </div>
         </div>
@@ -54,9 +54,9 @@ if(!isset($_SESSION)) {
             <img src="<?php echo UPLPATH . $article['slika']; ?>">
           </div>
           <div class="media_body">
-            <h4 class="title">
+            <h1 class="title">
                 <?php echo $article['naslov']; ?>
-            </h4>
+            </h1>
             <p class="description"><?php echo $article['kratki_sadrzaj']; ?></p>
           </div>
         </div>
